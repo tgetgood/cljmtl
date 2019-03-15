@@ -1,0 +1,76 @@
+#+TITLE: Macros in Clojure
+
+* Why use macros?
+
+	There are two main use cases for macros.
+
+	1) They don't evaluate their arguments, so you can implement new control
+		 structures like future, let, cond, etc.. out of them.
+
+	2) Macros are expanded at compile time, so it's possible to move computation
+		 from runtime to compile time.
+
+	In both cases, but especially case 2, these gains come with a cost, so use
+	them prudently.
+
+	I generally start on a new domain problem with a sea of macros that I slowly
+	delete until there are few (if any) left. I don't know that I recommend that
+	style of programming to others.
+
+** Macros to extend the language
+** Macros to do work at compile time
+** Macros to create objects
+
+* Homoiconicity
+	Homoiconicity is much talked about, incredibly useful, widely used to scare
+	people, and absolutely trivial. Like monads.
+
+	The essence of homoiconicity is that lisps don't need parsers. The string
+	representation of code in text files, is isomorphic to a literal datastructure.
+
+	This is the same as saying:
+
+	(comp str read-string) = (comp read-string str) = identity
+
+	This is, in essence, what makes macros possible.
+
+	A macro is just a function that takes sexps and returns an sexp. That result
+	is then passed back into the repl, or the compiler, and is itself executed.
+
+	If the source code (string in a text file) that you edit weren't isomorphic to
+	the AST of the language, then macros would be a fundamentally different
+	language, as they are in C. Homoiconicity is why macros are so useful in lisps.
+
+* REPL++
+	We think of the repl as (comp str eval read-string), but in reality
+	there's one more step which gets hidden inside eval.
+
+	When eval is called on a var, it first checks for the metadata ^{:macro true}.
+	If it finds it, then eval becomes (comp eval macroexpand).
+
+	Since macroexpand is a noop if the first symbol doesn't refer to a macro, we
+	can think of the repl as:
+
+	(comp str eval macroexpand read-string)
+
+	This makes it explicit that macroexpansion happens before evaluation
+	(compilation).
+
+	That's important for understanding what macros can and can't do.
+
+* Generalised Homoiconiciy
+
+	After evaluation homoiconicity is generally lost.
+
+	Is there anything for which (comp str eval read-string) = identity?
+
+	There is, and it's generally what's called "data" in clojure. Not in the sense
+	of "code is data" but in the sense of "data driven X".
+
+	I would define literal data as the subset of source code (text) which is
+	isomorphic with its representation in the runtime (JVM in this case).
+
+	That isomorphism means that transformations on data can do at runtime what
+	macros can do at compile time.
+
+	So data really is better than macros.

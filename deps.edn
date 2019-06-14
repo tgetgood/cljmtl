@@ -1,3 +1,6 @@
-{:deps  {org.clojure/clojure      {:mvn/version "1.10.0"}
-         org.clojure/core.async   {:mvn/version "0.4.490"}}
+{:deps  {dorothy                {:mvn/version "0.0.7"}
+         org.clojure/clojure    {:mvn/version "1.10.0"}
+         org.clojure/core.async {:mvn/version "0.4.490"}
+         vijual                 {:sha     "93dcbbd502b22e637d8cf923866ad34e03839d6d"
+                                 :git/url "https://github.com/tgetgood/vijual.git"}}
  :paths ["src"]}

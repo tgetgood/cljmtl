@@ -24,7 +24,7 @@ You don't know your way around the city, the cops have set up roadblocks at
 random, and worse yet, there's a rival gang in town (the Glowworms) that doesn't
 like competiton. At least they glow.
 
-## Agenda
+## Walkthrough
 
 ### Generate the world
 
@@ -64,3 +64,4 @@ extend the game, but don't let them limit you.
 * Roving glowworm gangs
 * Time limit
 * Multiplayer
+* Integrate with [Yetibot](https://yetibot.com/)

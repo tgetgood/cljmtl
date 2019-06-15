@@ -24,4 +24,43 @@ You don't know your way around the city, the cops have set up roadblocks at
 random, and worse yet, there's a rival gang in town (the Glowworms) that doesn't
 like competiton. At least they glow.
 
-## Tasks
+## Agenda
+
+### Generate the world
+
+The first thing we need to do is generate congestion city and populate it with
+glowworms, roadblocks, and the wumpus itself.
+
+Things to keep in mind:
+
+* Make sure the city is connected
+* There should be blood stains on all squares within two of the wumpus
+* There's an example of rendering a graph in graph.clj. We can use it for
+  testing our generated city
+
+### The Player
+
+Now we have a game world, but not a game. Let's fix that. We need to:
+
+* Place the player when a game starts
+* Add commands to walk and charge between nodes
+* Describe locations as the player reaches them
+* Detect final states (win / lose)
+* Track where the player has been
+* Add a map command that shows the seen parts of the city
+
+### Game Repl
+
+We could play the game by typing `(walk :east)`, but that's no good. We should
+be able to type `walk east`. There's a vanilla REPL implementation in
+repl.clj. Extend it to take the kinds of input one expects in a text game.
+
+### Extras
+
+Now we've got a game! But that's no reason to stop. Here are some more ideas to
+extend the game, but don't let them limit you.
+
+* Generate names for the city areas
+* Roving glowworm gangs
+* Time limit
+* Multiplayer
